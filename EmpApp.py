@@ -46,7 +46,7 @@ def AddEmp():
     cursor.execute(select_sql,(emp_id))
     if emp_image_file.filename == "":
         return "Please select a file"
-    if cursor.fetchone() > 1:
+    if select_sql > 1:
         return "This employee ID already exist"
 
     try:   
