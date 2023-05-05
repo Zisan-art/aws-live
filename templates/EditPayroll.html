@@ -13,17 +13,17 @@
 			<form method="post" action="/editpay">
                 <dl>
                     <p>
-                        <input name="inputName" value="{{ row['user_name'] }}" type="text" placeholder="Name" autocomplete="off" required>
+                        <input name="emp_id" value="{{ row['emp_id'] }}" type="text" placeholder="Employee ID" autocomplete="off" required>
                     </p>
                     <p>
-                        <input name="inputEmail" value="{{ row['user_email'] }}" type="text" placeholder="Email" autocomplete="off" required>
+                        <input name="job_title" value="{{ row['job_title'] }}" type="text" placeholder="Job Title" autocomplete="off" required>
                     </p>
                     <p>
-                        <input name="inputPassword" value="" type="password" placeholder="Password" autocomplete="off" required>
+                        <input name="salary" value="" type="number" placeholder="Salary" autocomplete="off" required>
                     </p>
                 </dl>
                 <p>
-                    <input name="id" value="{{ row['user_id'] }}" type="hidden">
+                    <input name="emp_id" value="{{ row['emp_id'] }}" type="hidden">
                     <input type="submit" value="Submit">
                 </p>
             </form>
