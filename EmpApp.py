@@ -1,8 +1,10 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
+import pymysql
 from pymysql import connections
 import os
 import boto3
 from config import *
+from tables import Results
 
 app = Flask(__name__)
 
@@ -18,20 +20,54 @@ db_conn = connections.Connection(
 
 )
 output = {}
-table = 'employee'
 
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
     return render_template('index.html')
 
-
 @app.route("/about", methods=['POST'])
 def about():
     return render_template('aboutus.html')
 
+@app.route('/addpay', methods=['POST'])
+def add_pay():
+    return render_template('AddPayroll.html')
+    emp_id = request.form['emp_id']
+    job_title = request.form['job_title']
+    salary = request.form['salary']
 
-@app.route("/addemp", methods=['GET','POST'])
+    insert_sql = "INSERT INTO payroll VALUES (%s, %s, %d)"
+    select_sql = "SELECT COUNT(*) FROM employee WHERE emp_id = (%s)"
+    cursor = db_conn.cursor()
+    cursor.execute(select_sql,(emp_id))
+
+    try:   
+        cursor.execute(insert_sql, (emp_id, job_title, salary))
+        db_conn.commit()
+        try:
+            print("Data inserted in MySQL RDS...")
+        except Exception as e:
+            return str(e)
+    finally:
+        cursor.close()
+    print("all modification done...")
+
+@app.route('/pay')
+def pays():
+    try:
+	cursor = db_conn.cursor()
+	cursor.execute("SELECT * FROM payroll")
+	rows = cursor.fetchall()
+	table = Results(rows)
+	table.border = True
+	return render_template('Payroll.html', table=table)
+    except Exception as e:
+	print(e)
+    finally:
+	cursor.close()
+
+@app.route("/addemp", methods=['POST'])
 def AddEmp():
     return render_template('AddEmp.html')
     emp_id = request.form['emp_id']
@@ -47,8 +83,6 @@ def AddEmp():
     cursor.execute(select_sql,(emp_id))
     if emp_image_file.filename == "":
         return "Please select a file"
-    if cursor.fetchone() > 1:
-        return "This employee ID already exist"
     try:   
         cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location))
         db_conn.commit()
