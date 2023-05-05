@@ -26,15 +26,9 @@ def home():
     return render_template('AddEmp.html')
 
 
-@app.route("/fetchdata", methods=['POST'])
-def getEmp():
-    emp_id = request.form['emp_id']
-    
-    if emp_id == "":
-        return "Please enter employee id"
-    return render_template('GetEmp.html', name=emp_name)
-
-
+@app.route("/about", methods=['POST'])
+def about():
+    return render_template('www.intellipaat.com')
 
 
 @app.route("/addemp", methods=['POST'])
@@ -42,8 +36,8 @@ def AddEmp():
     emp_id = request.form['emp_id']
     first_name = request.form['first_name']
     last_name = request.form['last_name']
-    contact = request.form['contact']
-    home_area = request.form['area']
+    pri_skill = request.form['pri_skill']
+    location = request.form['location']
     emp_image_file = request.files['emp_image_file']
 
     insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s)"
@@ -54,7 +48,7 @@ def AddEmp():
 
     try:
 
-        cursor.execute(insert_sql, (emp_id, first_name, last_name, contact, home_area))
+        cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location))
         db_conn.commit()
         emp_name = "" + first_name + " " + last_name
         # Uplaod image file in S3 #
