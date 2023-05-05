@@ -55,17 +55,13 @@ def add_pay():
 
 @app.route('/pay')
 def pays():
-    try:
-	cursor = db_conn.cursor()
-	cursor.execute("SELECT * FROM payroll")
-	rows = cursor.fetchall()
-	table = Results(rows)
-	table.border = True
-	return render_template('Payroll.html', table=table)
-    except Exception as e:
-	print(e)
-    finally:
-	cursor.close()
+    cursor = db_conn.cursor()
+    cursor.execute("SELECT * FROM payroll")
+    rows = cursor.fetchall()
+    table = Results(rows)
+    table.border = True
+    return render_template('Payroll.html', table=table)
+    cursor.close()
 
 @app.route("/addemp", methods=['POST'])
 def AddEmp():
