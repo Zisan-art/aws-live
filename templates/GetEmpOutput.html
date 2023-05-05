@@ -14,19 +14,22 @@
 
 				<div>
 
-			  		Employee ID:<br> {{ id }} <br><br>
+			  		Employee ID:<br> {{ out_id }} <br><br>
 
-			  		First Name:<br> {{ fname }} <br><br>
+			  		First Name:<br> {{ out_fname }} <br><br>
 
-			  		Last Name:<br> {{ lname }} <br><br>
+			  		Last Name:<br> {{ out_lname }} <br><br>
 
-			  		Primary Interest:<br> {{ interest }} <br><br>
+			  		Primary Interest:<br> {{ out_interest }} <br><br>
 
-			  		Location:<br> {{ location }} <br><br>
+			  		Location:<br> {{ out_location }} <br><br>
 
-			  		Image URL: <br> {{ image_url }} <br><br>
+			  		Image URL: <br> 
+					<div style="margin: auto">
+    						<img src="{{image_url}}" width="200px" height="200px" alt="Image Not Found">
+					</div>
 
-			  		<button type="submit" style="background: grey; height: 45px; width: 200px; color:white; font:oblique;" formaction="http://3.134.115.108:80/getemp">RESET</button><br><br>
+			  		<button type="submit" style="background: grey; height: 45px; width: 200px; color:white; font:oblique;" formaction="/getemp">RESET</button><br><br>
 
 			  	</div>
 
@@ -37,4 +40,3 @@
 	</font>
 </center>
 </html>
-
