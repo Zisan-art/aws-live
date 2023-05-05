@@ -23,7 +23,7 @@ table = 'employee'
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    return render_template('AddEmp.html')
+    return render_template('index.html')
 
 
 @app.route("/about")
@@ -33,6 +33,7 @@ def about():
 
 @app.route("/addemp", methods=['POST'])
 def AddEmp():
+    return render_template('AddEmp.html')
     emp_id = request.form['emp_id']
     first_name = request.form['first_name']
     last_name = request.form['last_name']
@@ -46,9 +47,8 @@ def AddEmp():
     cursor.execute(select_sql,(emp_id))
     if emp_image_file.filename == "":
         return "Please select a file"
-    if select_sql > 1:
+    if cursor.fetchone() > 1:
         return "This employee ID already exist"
-
     try:   
         cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location))
         db_conn.commit()
