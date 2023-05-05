@@ -53,16 +53,6 @@ def add_pay():
         cursor.close()
     print("all modification done...")
 
-@app.route('/pay')
-def pays():
-    cursor = db_conn.cursor()
-    cursor.execute("SELECT * FROM payroll")
-    rows = cursor.fetchall()
-    table = Results(rows)
-    table.border = True
-    return render_template('Payroll.html', table=table)
-    cursor.close()
-
 @app.route("/addemp", methods=['POST'])
 def AddEmp():
     return render_template('AddEmp.html')
