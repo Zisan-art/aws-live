@@ -1,22 +1,30 @@
-<!DOCTYPE html>
+	<!DOCTYPE html>
 <html>
 <head>
+	<title>Get Employee Information</title>
+</head>
 <center>
-	<font color="DodgerBlue" size="5" style="font-family: avenir">
+	<font color="black" size="5" style="font-family: avenir">
+
+		<h1 style="color: DodgerBlue">Employee Information</h1>
+
 		<body bgcolor="lightgrey">
-			<h1>SAVE SUCCESSFUL</h1><br>
-			<h2>Following Employee has been added to the database</h2><br>
-			<h2>{{ name }}</h2><br>
-			<title>Add Emp Output</title>
-				<form action="AddEmp.html" autocomplete="on" method = "POST">
-					<button type="submit" style="background: grey; height: 45px; width: 200px; color:white; font:oblique;">GO BACK</button><br><br>
-				</form>
+
+			<form action="/fetchdata" autocomplete="on" method="POST">
+
+				<h2 style="color: grey">Enter Employee ID</h2>
+
+		  		Employee ID:<br> <input style="height:25px;font-size:14pt;" type="number" name="emp_id" autofocus size="40"><br><br>
+
+
+		  		<button type="submit" style="background: grey; height: 45px; width: 200px; color: white; size: 5; font:oblique;">FETCH INFO</button><br><br>
+
+		  		<button type="submit" formaction="AddEmp.html" style="background: white	; height: 45px; width: 200px; color: black; size: 5; font:oblique;" method="GET">GO TO UPDATE DATABASE PAGE</button>
+
+			</form>
+
 		</body>
 	</font>
 </center>
-</head>
-<body>
-
-</body>
 </html>
 
