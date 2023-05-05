@@ -48,6 +48,7 @@ def AddEmp():
         return "Please select a file"
     if cursor.fetchone() is not None:
         return "Employee ID already exist"
+
     try:   
         cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location))
         db_conn.commit()
@@ -105,7 +106,7 @@ def GetEmp():
         else:
             emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
 
-            img_url = "https://fongsukdien-employee.s3.amazonaws.com/{0}".format(
+            img_url = "https://chuazisan-s3-bucket.s3.amazonaws.com/{0}".format(
                 emp_image_file_name_in_s3)
             
     except Exception as e:
