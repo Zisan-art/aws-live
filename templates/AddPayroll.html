@@ -10,22 +10,17 @@
 
 		<body bgcolor="lightgrey">
 
-			<form method="post" action="/addpay">
-                <dl>
-                    <p>
-                        <input name="emp_id" value="" type="text" placeholder="Employee ID" autocomplete="off" required>
-                    </p>
-                    <p>
-                        <input name="job_title" value="" type="text" placeholder="Job Title" autocomplete="off" required>
-                    </p>
-                    <p>
-                        <input name="salary" value="" type="number" placeholder="Salary" autocomplete="off" required>
-                    </p>
-                </dl>
-                <p>
-                    <input type="submit" value="Submit">
-                </p>
-            </form>
+			<form action="/addpay" autocomplete="on" method = "POST" enctype="multipart/form-data">
+
+		  		Employee ID:<br> <input style="height:25px;font-size:14pt; color:grey;" type="number" name="emp_id" autofocus size="40"><br><br>
+
+		  		Job Title:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="job_title" ><br><br>
+
+		  		Salary:<br> <input style="height:25px;font-size:14pt;color:grey;" type="number" name="salary"><br><br>
+
+		  		<button type="submit" style="background: grey; height: 45px; width: 200px; color: white; size: 5; font:oblique;">UPDATE DATABASE</button>
+
+			</form>
 		</body>
 
 	</font>
