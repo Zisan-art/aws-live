@@ -38,20 +38,20 @@ def AddEmp():
     last_name = request.form['last_name']
     pri_skill = request.form['pri_skill']
     location = request.form['location']
-    job_title = request.form['job_title']
     salary = request.form['salary']
-    bonus = request.form['bonus']
+    othours = request.form['othours']
     emp_image_file = request.files['emp_image_file']
 
-    insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s, %s, %d, %d)"
+    insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s, %s, %s)"
+    select_sql = "SELECT * FROM employee WHERE emp_id = (%s)"
     cursor = db_conn.cursor()
-
+    cursor.execute(select_sql,(emp_id))
     if emp_image_file.filename == "":
         return "Please select a file"
-
-    try:
-
-        cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location))
+    if cursor.fetchone() is not None:
+        return "Employee ID already exist"
+    try:   
+        cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location, salary, othours))
         db_conn.commit()
         emp_name = "" + first_name + " " + last_name
         # Uplaod image file in S3 #
@@ -73,6 +73,8 @@ def AddEmp():
                 s3_location,
                 custombucket,
                 emp_image_file_name_in_s3)
+            
+            print(object_url)
 
         except Exception as e:
             return str(e)
