@@ -6,28 +6,35 @@
 <center>
 	<font color="black" size="4" style="font-family: avenir">
 
-		<h1 style="color: DodgerBlue">Add Employee Database</h1>
+		<h1 style="color: DodgerBlue">Employee Database</h1>
 
 		<body bgcolor="lightgrey">
 
-			<form action="/addemp" autocomplete="off" method = "POST" enctype="multipart/form-data">
-				<h2>Personal Information</h2>
-						Employee ID:<br> <input style="height:25px;font-size:14pt; color:grey;" type="number" name="emp_id" autofocus size="40"><br><br>
-						First Name:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="first_name" ><br><br>
-						Last Name:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="last_name"><br><br>
-						Primary Skills:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="pri_skill"><br><br>
-						Location:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="location"><br><br>
+			<form action="/addemp" autocomplete="on" method = "POST" enctype="multipart/form-data">
+				<button type="submit" formaction="/updateemp" style="background: grey; height: 45px; width: 200px; color: white; size: 5; font:oblique;">UPDATE EXISTING EMPLOYEE INFO</button>
 
-						<h2>Company Information</h2>
-						Job Title:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="job_title"><br><br>
-						Salary:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="salary"><br><br>
-						Bonus:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="bonus"><br><br>
-						Profile Image: <input type=file name="emp_image_file" style="height:25px;font-size:14pt;color:grey;"> <br><br>
-						
+				<button type="submit" formaction="/getemp" style="background: grey; height: 45px; width: 200px; color: white; size: 5; font:oblique;">GET EMPLOYEE INFORMATION</button><br><br>
+
+		  		Employee ID:<br> <input style="height:25px;font-size:14pt; color:grey;" type="number" name="emp_id" autofocus size="40"><br><br>
+
+		  		First Name:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="first_name" ><br><br>
+
+		  		Last Name:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="last_name"><br><br>
+
+		  		Primary Skills:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="pri_skill"><br><br>
+
+		  		Location:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="location"><br><br>
+				
+				Salary:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="salary"><br><br>
+				
+				Overtime Hour(s):<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="othours"><br><br>
+
+		  		Image: <input type=file name="emp_image_file" style="height:25px;font-size:14pt;color:grey;"> <br><br>
+
 		  		<button type="submit" style="background: grey; height: 45px; width: 200px; color: white; size: 5; font:oblique;">UPDATE DATABASE</button>
+
 			</form>
-			<br><br>
-			<a href="/">Home</a>
+			<a href="/about">About Us</a>
 		</body>
 
 	</font>
