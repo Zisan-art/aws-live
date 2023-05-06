@@ -206,7 +206,7 @@ def UpEmp():
 
     try:
     
-        cursor.execute(update_sql, (emp_id, first_name, last_name, pri_skill, location, job_title, salary, bonus))
+        cursor.execute(update_sql, (first_name, last_name, pri_skill, location, job_title, salary, bonus, emp_id))
         db_conn.commit()
         emp_name = "" + first_name + " " + last_name
         if emp_image_file.filename is not None:
@@ -269,6 +269,7 @@ def delete():
             s3.Object(custombucket, object_name).delete()
             record = cursor.fetchone()
             obj = s3.Object(custombucket, object_name)
+            return render_template('DeleteEmpOutput.html', deleted_id=emp_id)
             
     except Exception as e:
         return str(e)
@@ -277,7 +278,6 @@ def delete():
         cursor.close()
 
     print("delete data done...")
-    return render_template('DeleteEmpOutput.html', deleted_id=emp_id)
 
 @app.route("/fsd")
 def fsdpage():
