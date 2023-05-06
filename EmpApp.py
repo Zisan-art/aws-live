@@ -16,8 +16,8 @@ db_conn = connections.Connection(
     user=customuser,
     password=custompass,
     db=customdb
-
 )
+
 output = {}
 table = 'employee'
 
@@ -26,7 +26,6 @@ table = 'employee'
 def home():
     return render_template('index.html')
 
-
 @app.route("/about",methods=['POST'])
 def about():
     return render_template('aboutus.html')
@@ -34,6 +33,31 @@ def about():
 @app.route("/addemp",methods=['POST'])
 def AddEmp():
     return render_template('AddEmp.html')
+
+@app.route("/getemp", methods=['GET', 'POST'])
+def getpage():
+    return render_template('GetEmp.html')
+
+@app.route("/updateemp", methods=['GET', 'POST'])
+def uppage():
+    return render_template('UpdateEmp.html')
+
+@app.route('/deleteemp', methods=['POST'])
+def deleteEmp():
+    return render_template('DeleteEmp.html')
+
+@app.route("/fsd")
+def fsdpage():
+    return render_template('fongsukdien.html')
+
+@app.route("/fmw")
+def fmwpage():
+    return render_template('mengwen.html')
+
+@app.route("/ethan")
+def ethanpage():
+    return render_template('ethanlim.html')
+
 
 @app.route("/add", methods=['POST'])
 def Add():
@@ -57,7 +81,6 @@ def Add():
         return "This Employee ID " + emp_id + " already exist"
 
     try:
-
         cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location, department, job_title, salary))
         db_conn.commit()
         emp_name = "" + first_name + " " + last_name
@@ -76,7 +99,7 @@ def Add():
             else:
                 s3_location = '-' + s3_location
 
-            object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
+                object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
                 s3_location,
                 custombucket,
                 emp_image_file_name_in_s3)
@@ -89,11 +112,6 @@ def Add():
 
     print("all modification done...")
     return render_template('AddEmpOutput.html', name=emp_name)
-
-
-@app.route("/getemp", methods=['GET', 'POST'])
-def getpage():
-    return render_template('GetEmp.html')
 
 
 @app.route("/fetchdata", methods=['POST'])
@@ -158,9 +176,6 @@ def GetEmp():
                            image_url=img_url
                           )
 
-@app.route("/updateemp", methods=['GET', 'POST'])
-def uppage():
-    return render_template('UpdateEmp.html')
 
 @app.route("/fetchup", methods=['POST'])
 def UpdateEmp():
@@ -195,6 +210,7 @@ def UpdateEmp():
                            out_salary=record[7]
                           )
 
+
 @app.route("/upemp", methods=['POST'])
 def UpEmp():
     emp_id = request.form['emp_id']
@@ -211,7 +227,6 @@ def UpEmp():
     cursor = db_conn.cursor()
 
     try:
-    
         cursor.execute(update_sql, (first_name, last_name, pri_skill, location, department, job_title, salary, emp_id))
         db_conn.commit()
         emp_name = "" + first_name + " " + last_name
@@ -232,7 +247,7 @@ def UpEmp():
                 else:
                     s3_location = '-' + s3_location
 
-                object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
+                    object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
                     s3_location,
                     custombucket,
                     emp_image_file_name_in_s3)
@@ -246,9 +261,6 @@ def UpEmp():
     print("all modification done...")
     return render_template('UpdateEmpOutput.html', name=emp_name)
 
-@app.route('/deleteemp', methods=['POST'])
-def deleteEmp():
-    return render_template('DeleteEmp.html')
 
 @app.route('/delete', methods=['POST'])
 def delete():
@@ -284,15 +296,7 @@ def delete():
         cursor.close()
 
     print("delete data done...")
+    
 
-@app.route("/fsd")
-def fsdpage():
-    return render_template('fongsukdien.html')
-@app.route("/fmw")
-def fmwpage():
-    return render_template('mengwen.html')
-@app.route("/ethan")
-def ethanpage():
-    return render_template('ethanlim.html')
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
