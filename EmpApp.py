@@ -31,7 +31,29 @@ def home():
 def about():
     return render_template('aboutus.html')
 
+@app.route("/addemp", methods=['POST'])
+def AddEmp():
+    emp_id = request.form['emp_id']
+    first_name = request.form['first_name']
+    last_name = request.form['last_name']
+    pri_skill = request.form['pri_skill']
+    location = request.form['location']
+    salary = request.form['salary']
+    othours = request.form['othours']
+    emp_image_file = request.files['emp_image_file']
 
+    insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s, %s, %s)"
+    select_sql = "SELECT * FROM employee WHERE emp_id = (%s)"
+    cursor = db_conn.cursor()
+    cursor.execute(select_sql,(emp_id))
+    if emp_image_file.filename == "":
+        return "Please select a file"
+    if cursor.fetchone() is not None:
+        return "Employee ID already exist"
+    try:   
+        cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location, salary, othours))
+
+   
 @app.route("/addemp", methods=['POST'])
 def AddEmp():
     return render_template('AddEmp.html')
@@ -116,7 +138,7 @@ def GetEmp():
             img_url = "https://chuazisan-employee.s3.amazonaws.com/{0}".format(
                 emp_image_file_name_in_s3)
             
-            calc_payroll = record[5] + (record[5] * 0.05 * record[6])
+            calc_payroll = record[6] + record[7]
     except Exception as e:
         return str(e)
 
@@ -129,7 +151,7 @@ def GetEmp():
                            out_id="ID Not Exist", 
                            out_fname="NULL", 
                            out_lname="NULL",
-                           out_interest="NULL",
+                           out_skill="NULL",
                            out_location="NULL",
                            out_jobtitle="NULL",
                            out_salary="NULL",
@@ -143,7 +165,7 @@ def GetEmp():
                            out_id=record[0], 
                            out_fname=record[1], 
                            out_lname=record[2],
-                           out_interest=record[3],
+                           out_skill=record[3],
                            out_location=record[4],
                            out_jobtitle=record[5],
                            out_salary=record[6],
