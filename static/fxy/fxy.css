@@ -1,0 +1,146 @@
+body {
+    margin-top: 0;
+    padding: 0 ;
+    text-align: center;
+}
+
+.wrapper {
+    width: 100%;
+    margin: 0 auto;
+}
+
+main {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+header {
+    height: 100px;
+    background: #262626;
+    width: 99%;
+    z-index: 1;
+    position: fixed;
+}
+
+nav {
+    float: right;
+    line-height: 100px;
+}
+
+nav a {
+    text-decoration: none;
+    font-family: 'Courier New', Courier, monospace;
+    letter-spacing: 5px;
+    font-size: 20px;
+    margin: 0 10px;
+    color: #bdb2ff;
+}
+
+.content-area {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    top: 500px;
+    background: black;
+}
+
+#home h2 {
+    margin: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 40px;
+    color: #ade8f4;
+}
+
+#home p {
+    margin: 15px;
+    font-size: 20px;
+    color: whitesmoke;
+    text-align: left;
+}
+
+.home-banner {
+    width: 99%;
+    height: 500px;
+    position: fixed;
+    background-image: url(img/banner.jpg);
+    -webkit-background-size:cover;
+    background-size: cover;
+    background-position: center center;
+}
+
+.home-banner h2 {
+    padding-top: 15%;
+    font-size: 70px;
+    font-family: Arial,Verdana,Georgia, 'Times New Roman';
+    text-transform: uppercase;
+    color: whitesmoke;
+}
+
+#about {
+    padding-top: 50px;
+}
+
+#skills {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    color: white;
+    padding-top: 50px;
+}
+
+#skills h3{
+    font-size: 25px;
+    line-height: 2;
+    color: black;
+}
+
+#skills p{
+    font-size: 20px;
+    line-height: 1.5;
+    color: black;
+}
+
+.skill {
+    width: 25%;
+    text-align: center;
+    background-color:whitesmoke; 
+    border-radius: 10px;
+    padding: 2rem; 
+}
+
+#gallery {
+    text-align: center;
+    margin: 2rem 0;
+    padding-top: 50px;
+  }
+  
+.gallery-images {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+  
+.image-container img{
+    display: inline-block;
+    position: relative;
+    width: 300px;
+    height:400px;
+    padding: 50px;
+}
+
+footer {
+    background-color: #262626;
+    color: #bdb2ff;
+    font-family: Arial,Verdana,Georgia, 'Times New Roman', Times;
+    font-size: 15px;
+    font-style: italic;
+    text-align: center ;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+footer a{
+    color: #bdb2ff;
+    font-family: Arial,Verdana,Georgia, 'Times New Roman', Times;
+}
