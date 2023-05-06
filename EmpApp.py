@@ -223,10 +223,11 @@ def UpEmp():
     salary = request.form['salary']
     emp_image_file = request.files['emp_image_file']
 
-    update_sql = "UPDATE employee SET first_name=(%s), last_name=(%s), pri_skill=(%s), location=(%s), department=(%s), job_title=(%s), salary=(%s), WHERE emp_id = (%s)"
+    update_sql = "UPDATE employee SET first_name=(%s), last_name=(%s), pri_skill=(%s), location=(%s), department=(%s), job_title=(%s), salary=(%s) WHERE emp_id = (%s)"
     cursor = db_conn.cursor()
 
     try:
+    
         cursor.execute(update_sql, (first_name, last_name, pri_skill, location, department, job_title, salary, emp_id))
         db_conn.commit()
         emp_name = "" + first_name + " " + last_name
