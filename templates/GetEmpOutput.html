@@ -11,18 +11,38 @@
 		<body bgcolor="lightgrey">
 
 			<form>
+				<div style="width: 100%;">
+					<div style="float:left; width: 33%;">
+						Profile Image: <br> 
+						<div style="margin: auto">
+    							<img src="{{image_url}}" width="200px" height="200px" alt="Image Not Found">
+						</div>
+						<br>Date:<br> {{ out_date }} <br><br>
+					</div>
+
+					<div style="float:left; width: 33%;">
+						<h2>Personal Information</h2>
+						Employee ID:<br> {{ out_id }} <br><br>
+			  			First Name:<br> {{ out_fname }} <br><br>
+			  			Last Name:<br> {{ out_lname }} <br><br>
+			  			Primary Skill:<br> {{ out_skill }} <br><br>
+			  			Location:<br> {{ out_location }} <br><br>
+					</div>
+					
+					<div style="float:left; width: 33%;">
+						<h2>Work Detail</h2>
+						Department:<br> {{ out_department }} <br><br>
+						Job Title:<br> {{ out_jobtitle }} <br><br>
+			  			Salary:<br> RM {{ out_salary }} <br><br>
+						Bonus:<br> RM {{ out_bonus }} <br><br>
+						Payroll:<br> RM {{ out_payroll }} <br><br>
+					</div>
+				</div>
+				<div style="clear: both;"></div>
+				
 				<div>
 
-			  		Employee ID:<br> {{ out_id }} <br><br>
-
-			  		First Name:<br> {{ out_fname }} <br><br>
-
-			  		Last Name:<br> {{ out_lname }} <br><br>
-
-			  		Primary Skill:<br> {{ out_skill }} <br><br>
-
-			  		Location:<br> {{ out_location }} <br><br>
-					
+			  		
 					Department:<br> {{ out_department }} <br><br>
 					
 					Job Title:<br> {{ out_jobtitle }} <br><br>
@@ -33,12 +53,8 @@
 					
 					Payroll:<br> {{ out_payroll }} <br><br>
 					
-					Date:<br> {{ out_date }} <br><br>
 					
-			  		Image URL: <br> 
-					<div style="margin: auto">
-    						<img src="{{image_url}}" width="200px" height="200px" alt="Image Not Found">
-					</div>
+
 					<br>
 			  		<button type="submit" style="background: grey; height: 45px; width: 200px; color:white; font:oblique;" formaction="/getemp">RESET</button><br>
 					
