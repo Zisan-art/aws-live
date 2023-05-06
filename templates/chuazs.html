@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Chua Zi San Portfolio</title>
-	<link rel="stylesheet" href="chua.css">
+	<link rel="stylesheet" href="{{ url_for('static', filename='czs/chua.css')}}">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -22,7 +22,7 @@
 	</header>
 
 	<section id="profile">
-		<img id="profile" src="img/img1.jpg" alt="Profile Chua Zi San">
+		<img id="profile" src="{{ url_for('static', filename='czs/img/img1.jpg')}}" alt="Profile Chua Zi San">
 		<div class="content">
 			<h1>Hello</h1>
 			<h1>I'm Chua Zi San</h1>
@@ -97,29 +97,29 @@
 			<h1>Projects</h1>
 			<div class="project" style="width: 100%;">
 				<div class="gallery" style="float:left; width: 49%">
-					<a target="_blank" href="img/img2.jpeg">
-						<img src="img/img2.jpeg" alt="NLP">
+					<a target="_blank" href="czs/img/img2.jpg">
+						<img src="{{ url_for('static', filename='czs/img/img2.jpg')}}" alt="NLP">
 					</a>
 					<div class="desc">Lemmatization the malay language by using NLP tool</div>
 				</div>
 				  
 				<div class="gallery" style="float:left; width: 49%">
-					<a target="_blank" href="img/img3.jpeg">
-					  	<img src="img/img3.jpeg" alt="Website">
+					<a target="_blank" href="czs/img/img3.jpg">
+						<img src="{{ url_for('static', filename='czs/img/img3.jpg')}}" alt="Website">
 					</a>
 					<div class="desc">Create a own website by using HTML and CSS</div>
 				</div>
 				  
 				<div class="gallery" style="float:left; width: 49%">
-					<a target="_blank" href="img/img4.jpeg">
-					  	<img src="img/img4.jpeg" alt="Advertisement">
+					<a target="_blank" href="czs/img/img4.jpg">
+						<img src="{{ url_for('static', filename='czs/img/img4.jpg')}}" alt="Advertisement">
 					</a>
 					<div class="desc">Develop a video advertisement by using Google Web Designer</div>
 				</div>
 				  
 				<div class="gallery" style="float:left; width: 49%">
-					<a target="_blank" href="img/img5.jpeg">
-					  	<img src="img/img5.jpeg" alt="Mini Game">
+					<a target="_blank" href="czs/img/img5.jpeg">
+						<img src="{{ url_for('static', filename='czs/img/img5.jpg')}}" alt="Mini Game">
 					</a>
 				<div class="desc">Develop a competition running game by using C++</div>
 					
