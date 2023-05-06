@@ -48,11 +48,11 @@ def deleteEmp():
 
 @app.route("/czs")
 def fsdpage():
-    return render_template('chuazs.html')
+    return render_template('chuazisan.html')
 
 @app.route("/fxy")
 def fmwpage():
-    return render_template('fongxy.html')
+    return render_template('fongxinyi.html')
 
 @app.route("/tpy")
 def ethanpage():
