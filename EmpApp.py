@@ -112,7 +112,7 @@ def GetEmp():
         else:
             emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
 
-            img_url = "https://chuazisan-employee.s3.amazonaws.com/{0}".format(
+            img_url = "https://chuazisan-s3-bucket.s3.amazonaws.com/{0}".format(
                 emp_image_file_name_in_s3)
             
             calc_payroll = record[6] + record[7]
