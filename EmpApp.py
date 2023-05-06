@@ -206,7 +206,7 @@ def UpEmp():
 
     try:
     
-        cursor.execute(update_sql, (first_name, last_name, pri_skill, location, job_title, salary, bonus))
+        cursor.execute(update_sql, (emp_id, first_name, last_name, pri_skill, location, job_title, salary, bonus))
         db_conn.commit()
         emp_name = "" + first_name + " " + last_name
         if emp_image_file.filename is not None:
