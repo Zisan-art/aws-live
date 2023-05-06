@@ -258,7 +258,7 @@ def delete():
         record = cursor.fetchone()
         print("Fetched: ",record)
         if record is None:
-            print("No data found.")
+            return "Employee Not Found. To add new record, please proceed to Home Page."
             
         else:
             cursor.execute(delete_sql, (emp_id))
