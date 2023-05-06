@@ -149,7 +149,7 @@ def GetEmp():
                            out_lname=record[2],
                            out_skill=record[3],
                            out_location=record[4],
-                           out_department=record[5]
+                           out_department=record[5],
                            out_jobtitle=record[6],
                            out_salary=record[7],
                            out_bonus=str(calc_bonus),
