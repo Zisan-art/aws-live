@@ -30,7 +30,6 @@ def home():
 @app.route("/about",methods=['POST'])
 def about():
     return render_template('aboutus.html')
-
 @app.route("/addemp", methods=['POST'])
 def AddEmp():
     return render_template('AddEmp.html')
@@ -39,20 +38,20 @@ def AddEmp():
     last_name = request.form['last_name']
     pri_skill = request.form['pri_skill']
     location = request.form['location']
+    job_title = request.form['job_title']
     salary = request.form['salary']
-    othours = request.form['othours']
+    bonus = request.form['bonus']
     emp_image_file = request.files['emp_image_file']
 
-    insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s, %s, %s)"
-    select_sql = "SELECT * FROM employee WHERE emp_id = (%s)"
+    insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s, %s, %d, %d)"
     cursor = db_conn.cursor()
-    cursor.execute(select_sql,(emp_id))
+
     if emp_image_file.filename == "":
         return "Please select a file"
-    if cursor.fetchone() is not None:
-        return "Employee ID already exist"
-    try:   
-        cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location, salary, othours))
+
+    try:
+
+        cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location))
         db_conn.commit()
         emp_name = "" + first_name + " " + last_name
         # Uplaod image file in S3 #
@@ -74,8 +73,6 @@ def AddEmp():
                 s3_location,
                 custombucket,
                 emp_image_file_name_in_s3)
-            
-            print(object_url)
 
         except Exception as e:
             return str(e)
