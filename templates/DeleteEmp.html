@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Delete Employee Information</title>
+	<script>
+		function confirmSubmit() {
+			var confirmed = window.confirm("Are you sure you want to delete this record?");
+			if (confirmed) {
+				return true;
+			} 
+			else {
+				return false;
+			}
+		}
+	</script>
+</head>
+<center>
+	<font color="black" size="5" style="font-family: avenir">
+
+		<h1 style="color: DodgerBlue">Delete Employee Information</h1>
+
+		<body bgcolor="lightgrey">
+
+			<form action="/deleteemp" autocomplete="on" method="POST">
+
+				<h2 style="color: grey">Enter Employee ID</h2>
+
+		  		Employee ID:<br> <input style="height:25px;font-size:14pt;" type="number" name="emp_id" autofocus size="40"><br><br>
+
+				<form onsubmit="return confirmSubmit()" action="/delete" method = "POST">
+					<input type="hidden" name="emp_id" value="emp_id">
+					<button type="submit" style="background: grey; height: 45px; width: 200px; color:white; font:oblique;">Delete Record</button><br>
+				</form>
+			</form>
+			<br><br>
+			<a href="/">Home</a>
+
+		</body>
+	</font>
+</center>
+</html>

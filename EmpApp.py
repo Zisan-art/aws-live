@@ -1,10 +1,9 @@
-from flask import Flask, render_template, request, redirect
-import pymysql
+from flask import Flask, render_template, request
 from pymysql import connections
 import os
 import boto3
 from config import *
-from tables import Results
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -20,38 +19,18 @@ db_conn = connections.Connection(
 
 )
 output = {}
+table = 'employee'
 
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
     return render_template('index.html')
 
-@app.route("/about", methods=['POST'])
+
+@app.route("/about")
 def about():
     return render_template('aboutus.html')
 
-@app.route('/addpay', methods=['POST'])
-def add_pay():
-    return render_template('AddPayroll.html')
-    emp_id = request.form['emp_id']
-    job_title = request.form['job_title']
-    salary = request.form['salary']
-
-    insert_sql = "INSERT INTO payroll VALUES (%s, %s, %d)"
-    select_sql = "SELECT COUNT(*) FROM employee WHERE emp_id = (%s)"
-    cursor = db_conn.cursor()
-    cursor.execute(select_sql,(emp_id))
-
-    try:   
-        cursor.execute(insert_sql, (emp_id, job_title, salary))
-        db_conn.commit()
-        try:
-            print("Data inserted in MySQL RDS...")
-        except Exception as e:
-            return str(e)
-    finally:
-        cursor.close()
-    print("all modification done...")
 
 @app.route("/addemp", methods=['POST'])
 def AddEmp():
@@ -61,16 +40,21 @@ def AddEmp():
     last_name = request.form['last_name']
     pri_skill = request.form['pri_skill']
     location = request.form['location']
+    job_title = request.form['job_title']
+    salary = request.form['salary']
+    bonus = request.form['bonus']
     emp_image_file = request.files['emp_image_file']
 
-    insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s)"
-    select_sql = "SELECT COUNT(*) FROM employee WHERE emp_id = (%s)"
+    insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s, %s, %d, %d)"
+    select_sql = "SELECT * FROM employee WHERE emp_id = (%s)"
     cursor = db_conn.cursor()
     cursor.execute(select_sql,(emp_id))
     if emp_image_file.filename == "":
         return "Please select a file"
+    if cursor.fetchone() is not None:
+        return "Employee ID already exist"
     try:   
-        cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location))
+        cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location, job_title, salary, bonus))
         db_conn.commit()
         emp_name = "" + first_name + " " + last_name
         # Uplaod image file in S3 #
@@ -104,13 +88,16 @@ def AddEmp():
     print("all modification done...")
     return render_template('AddEmpOutput.html', name=emp_name)
 
+
 @app.route("/getemp", methods=['GET', 'POST'])
 def getpage():
     return render_template('GetEmp.html')
 
+
 @app.route("/fetchdata", methods=['POST'])
 def GetEmp():
     emp_id = request.form['emp_id']
+    sysdate = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
     select_sql = "SELECT * FROM employee WHERE emp_id = (%s)"
     cursor = db_conn.cursor()
     img_url = ""
@@ -126,9 +113,10 @@ def GetEmp():
         else:
             emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
 
-            img_url = "https://chuazisan-s3-bucket.s3.amazonaws.com/{0}".format(
+            img_url = "https://chuazisan-employee.s3.amazonaws.com/{0}".format(
                 emp_image_file_name_in_s3)
             
+            calc_payroll = record[5] + (record[5] * 0.05 * record[6])
     except Exception as e:
         return str(e)
 
@@ -143,6 +131,10 @@ def GetEmp():
                            out_lname="NULL",
                            out_interest="NULL",
                            out_location="NULL",
+                           out_salary="NULL",
+                           out_othours="NULL",
+                           out_payroll="NULL",
+                           out_date="NULL",                               
                            image_url=img_url
                           )
     else :
@@ -152,8 +144,119 @@ def GetEmp():
                            out_lname=record[2],
                            out_interest=record[3],
                            out_location=record[4],
+                           out_salary=record[5],
+                           out_othours=record[6],
+                           out_payroll=str(calc_payroll),
+                           out_date=sysdate,
                            image_url=img_url
                           )
+
+@app.route("/updateemp", methods=['GET', 'POST'])
+def uppage():
+    return render_template('UpdateEmp.html')
+
+@app.route("/fetchup", methods=['POST'])
+def UpdateEmp():
+    emp_id = request.form['emp_id']
+    select_sql = "SELECT * FROM employee WHERE emp_id = (%s)"
+    cursor = db_conn.cursor()
+    img_url = ""
+    try:
+        cursor.execute(select_sql,(emp_id))
+        print("Fetching single row")        
+        # Fetch one record from SQL query output
+        record = cursor.fetchone()
+        print("Fetched: ",record)
+        if record is None:
+            return "Employee Not Found. To add new record, please proceed to Home Page."
+            
+    except Exception as e:
+        return str(e)
+
+    finally:
+        cursor.close()
+
+    print("fetch data done...")
+    return render_template('UpdateEmpContent.html', 
+                           out_id=record[0], 
+                           out_fname=record[1], 
+                           out_lname=record[2],
+                           out_skill=record[3],
+                           out_location=record[4],
+                           out_salary=record[5],
+                           out_othours=record[6]
+                          )
+
+@app.route("/upemp", methods=['POST'])
+def UpEmp():
+    emp_id = request.form['emp_id']
+    first_name = request.form['first_name']
+    last_name = request.form['last_name']
+    pri_skill = request.form['pri_skill']
+    location = request.form['location']
+    salary = request.form['salary']
+    othours = request.form['othours']
+    emp_image_file = request.files['emp_image_file']
+
+    update_sql = "UPDATE employee SET first_name=(%s), last_name=(%s), pri_skill=(%s), location=(%s), salary=(%s), othours=(%s) WHERE emp_id = (%s)"
+    cursor = db_conn.cursor()
+
+    try:   
+        cursor.execute(update_sql, (first_name, last_name, pri_skill, location, salary, salary, othours))
+        db_conn.commit()
+        emp_name = "" + first_name + " " + last_name
+        if emp_image_file.filename is not None:
+            emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
+
+            s3 = boto3.resource('s3')
+            obj = s3.Object(custombucket, emp_image_file_name_in_s3)
+            obj.delete()
+            try:
+                print("Data inserted in MySQL RDS... uploading image to S3...")
+                s3.Bucket(custombucket).put_object(Key=emp_image_file_name_in_s3, Body=emp_image_file)
+                bucket_location = boto3.client('s3').get_bucket_location(Bucket=custombucket)
+                s3_location = (bucket_location['LocationConstraint'])
+
+                if s3_location is None:
+                    s3_location = ''
+                else:
+                    s3_location = '-' + s3_location
+
+                object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
+                    s3_location,
+                    custombucket,
+                    emp_image_file_name_in_s3)
+
+            except Exception as e:
+                return str(e)
+
+    finally:
+        cursor.close()
+
+    print("all modification done...")
+    return render_template('UpdateEmpOutput.html', name=emp_name)
+
+@app.route('/deleteemp', methods=['POST'])
+def deleteEmp():
+    return render_template('DeleteEmp.html')
+
+@app.route('/delete', methods=['POST'])
+def delete():
+    emp_id = request.form['emp_id']
+    delete_sql = "DELETE FROM employee WHERE emp_id = (%s)"
+    select_sql = "SELECT * FROM employee WHERE emp_id = (%s)"
+
+    cursor = db_conn.cursor()
+    cursor.execute(delete_sql, (emp_id))
+    db_conn.commit()
+    cursor.execute(select_sql, (emp_id))
+    object_name = "emp-id-" + str(emp_id) + "_image_file"
+    s3 = boto3.resource('s3')
+    s3.Object(custombucket, object_name).delete()
+    record = cursor.fetchone()
+    obj = s3.Object(custombucket, object_name)
+    return render_template('DeleteEmpOutput.html', deleted_id=emp_id)
+
 @app.route("/fsd")
 def fsdpage():
     return render_template('fongsukdien.html')

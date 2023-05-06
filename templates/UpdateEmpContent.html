@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Update Employee Information</title>
+</head>
+<center>
+	<font color="black" size="4" style="font-family: avenir">
+
+		<h1 style="color: DodgerBlue">Update Employee Database</h1>
+
+		<body bgcolor="lightgrey">
+			<form action="/upemp" autocomplete="off" method = "POST" enctype="multipart/form-data">
+				<div style="width: 100%;">
+					<div style="float:left; width: 50%;">
+						<h2>Personal Information</h2>
+						Employee ID:<br> <input style="height:25px;font-size:14pt; color:grey;" type="number" name="emp_id" size="40" value="{{out_id}}" readonly><br><br>
+						First Name:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="first_name" autofocus value="{{out_fname}}"><br><br>
+						Last Name:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="last_name" value="{{out_lname}}"><br><br>
+						Primary Skills:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="pri_skill" value="{{out_skill}}"><br><br>
+						Location:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="location" value="{{out_location}}"><br><br>
+					</div>
+
+					<div style="float:right; width: 50%;">
+						Job Title:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="job_title" value="{{out_jobtitle}}"><br><br>
+						Salary:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="salary" value="{{out_salary}}"><br><br>
+						Bonus:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="bonus" value="{{out_bonus}}"><br><br>
+						Profile Image: <input type=file name="emp_image_file" style="height:25px;font-size:14pt;color:grey;"> <br><br>
+					</div>
+					<div style="clear: both;"></div>
+
+		  		<button type="submit" style="background: grey; height: 45px; width: 200px; color: white; size: 5; font:oblique;">UPDATE EMPLOYEE</button>
+				<br><br>
+				<a href="/updateemp">Go Back</a>
+		  		
+			</form>
+		</body>
+
+	</font>
+</center>
+</html>
