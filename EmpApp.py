@@ -118,7 +118,7 @@ def GetEmp():
             img_url = "https://chuazisan-s3-bucket.s3.amazonaws.com/{0}".format(
                 emp_image_file_name_in_s3)
             
-            calc_bonus = float(record[7] * 0.1)
+            calc_bonus = float(record[7] * 0.10)
             calc_payroll = float(record[7] + calc_bonus)
     except Exception as e:
         return str(e)
@@ -152,8 +152,8 @@ def GetEmp():
                            out_department=record[5],
                            out_jobtitle=record[6],
                            out_salary=record[7],
-                           out_bonus=str(calc_bonus),
-                           out_payroll=str(calc_payroll),
+                           out_bonus=float(calc_bonus),
+                           out_payroll=float(calc_payroll),
                            out_date=sysdate,
                            image_url=img_url
                           )
