@@ -42,9 +42,9 @@ def Add():
     last_name = request.form['last_name']
     pri_skill = request.form['pri_skill']
     location = request.form['location']
+    department = request.form['department']
     job_title = request.form['job_title']
     salary = request.form['salary']
-    bonus = request.form['bonus']
     emp_image_file = request.files['emp_image_file']
 
     insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
@@ -58,7 +58,7 @@ def Add():
 
     try:
 
-        cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location, job_title, salary, bonus))
+        cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location, department, job_title, salary))
         db_conn.commit()
         emp_name = "" + first_name + " " + last_name
         # Uplaod image file in S3 #
@@ -118,7 +118,8 @@ def GetEmp():
             img_url = "https://chuazisan-s3-bucket.s3.amazonaws.com/{0}".format(
                 emp_image_file_name_in_s3)
             
-            calc_payroll = record[6] + record[7]
+            calc_bonus = record[7] * 0.1
+            calc_payroll = record[7] + calc_bonus
     except Exception as e:
         return str(e)
 
@@ -133,6 +134,7 @@ def GetEmp():
                            out_lname="NULL",
                            out_skill="NULL",
                            out_location="NULL",
+                           out_department="NULL",
                            out_jobtitle="NULL",
                            out_salary="NULL",
                            out_bonus="NULL",
@@ -147,9 +149,10 @@ def GetEmp():
                            out_lname=record[2],
                            out_skill=record[3],
                            out_location=record[4],
-                           out_jobtitle=record[5],
-                           out_salary=record[6],
-                           out_bonus=record[7],
+                           out_department=record[5]
+                           out_jobtitle=record[6],
+                           out_salary=record[7],
+                           out_bonus=str(calc_bonus),
                            out_payroll=str(calc_payroll),
                            out_date=sysdate,
                            image_url=img_url
@@ -187,9 +190,9 @@ def UpdateEmp():
                            out_lname=record[2],
                            out_skill=record[3],
                            out_location=record[4],
-                           out_jobtitle=record[5],
-                           out_salary=record[6],
-                           out_bonus=record[7]
+                           out_department=record[5],
+                           out_jobtitle=record[6],
+                           out_salary=record[7]
                           )
 
 @app.route("/upemp", methods=['POST'])
@@ -199,17 +202,17 @@ def UpEmp():
     last_name = request.form['last_name']
     pri_skill = request.form['pri_skill']
     location = request.form['location']
+    department = request.form['department']
     job_title = request.form['job_title']
     salary = request.form['salary']
-    bonus = request.form['bonus']
     emp_image_file = request.files['emp_image_file']
 
-    update_sql = "UPDATE employee SET first_name=(%s), last_name=(%s), pri_skill=(%s), location=(%s), job_title=(%s), salary=(%s), bonus=(%s) WHERE emp_id = (%s)"
+    update_sql = "UPDATE employee SET first_name=(%s), last_name=(%s), pri_skill=(%s), location=(%s), department=(%s), job_title=(%s), salary=(%s), WHERE emp_id = (%s)"
     cursor = db_conn.cursor()
 
     try:
     
-        cursor.execute(update_sql, (first_name, last_name, pri_skill, location, job_title, salary, bonus, emp_id))
+        cursor.execute(update_sql, (first_name, last_name, pri_skill, location, department, job_title, salary, emp_id))
         db_conn.commit()
         emp_name = "" + first_name + " " + last_name
         if emp_image_file.filename is not None:
