@@ -54,7 +54,7 @@ def Add():
     if emp_image_file.filename == "":
         return "Please select a file"
     if cursor.fetchone() is not None:
-        return "Employee ID already exist"
+        return "This Employee ID " + emp_id + " already exist"
 
     try:
 
@@ -110,7 +110,7 @@ def GetEmp():
         record = cursor.fetchone()
         print("Fetched: ",record)
         if record is None:
-            print("No data found.")
+            print("No record found.")
             
         else:
             emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
@@ -118,8 +118,8 @@ def GetEmp():
             img_url = "https://chuazisan-s3-bucket.s3.amazonaws.com/{0}".format(
                 emp_image_file_name_in_s3)
             
-            calc_bonus = record[7] * 0.1
-            calc_payroll = record[7] + calc_bonus
+            calc_bonus = float(record[7] * 0.1)
+            calc_payroll = float(record[7] + calc_bonus)
     except Exception as e:
         return str(e)
 
@@ -175,7 +175,7 @@ def UpdateEmp():
         record = cursor.fetchone()
         print("Fetched: ",record)
         if record is None:
-            return "Employee Not Found. To add new record, please proceed to Home Page."
+            return "No record found."
             
     except Exception as e:
         return str(e)
@@ -264,7 +264,7 @@ def delete():
         record = cursor.fetchone()
         print("Fetched: ",record)
         if record is None:
-            return "Employee Not Found. To add new record, please proceed to Home Page."
+            return "No record found."
             
         else:
             cursor.execute(delete_sql, (emp_id))
