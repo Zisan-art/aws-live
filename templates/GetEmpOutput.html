@@ -11,30 +11,41 @@
 		<body bgcolor="lightgrey">
 
 			<form>
-
 				<div>
 
-			  		Employee ID:<br> {{ id }} <br><br>
+			  		Employee ID:<br> {{ out_id }} <br><br>
 
-			  		First Name:<br> {{ fname }} <br><br>
+			  		First Name:<br> {{ out_fname }} <br><br>
 
-			  		Last Name:<br> {{ lname }} <br><br>
+			  		Last Name:<br> {{ out_lname }} <br><br>
 
-			  		Primary Interest:<br> {{ interest }} <br><br>
+			  		Primary Skill:<br> {{ out_skill }} <br><br>
 
-			  		Location:<br> {{ location }} <br><br>
+			  		Location:<br> {{ out_location }} <br><br>
+					
+					Job Title:<br> {{ out_jobtitle }} <br><br>
 
-			  		Image URL: <br> {{ image_url }} <br><br>
-
-			  		<button type="submit" style="background: grey; height: 45px; width: 200px; color:white; font:oblique;" formaction="http://3.134.115.108:80/getemp">RESET</button><br><br>
-
+			  		Salary:<br> {{ out_salary }} <br><br>
+					
+					Bonus:<br> {{ out_bonus }} <br><br>
+					
+					Payroll:<br> {{ out_payroll }} <br><br>
+					
+					Date:<br> {{ out_date }} <br><br>
+					
+			  		Image URL: <br> 
+					<div style="margin: auto">
+    						<img src="{{image_url}}" width="200px" height="200px" alt="Image Not Found">
+					</div>
+					<br>
+			  		<button type="submit" style="background: grey; height: 45px; width: 200px; color:white; font:oblique;" formaction="/getemp">RESET</button><br>
+					
 			  	</div>
-
 			</form>
-
+			<br>
+			<a href="/">Home</a>
 		</body>
 
 	</font>
 </center>
 </html>
-
