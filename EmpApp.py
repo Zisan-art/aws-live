@@ -27,7 +27,7 @@ def home():
     return render_template('index.html')
 
 
-@app.route("/about")
+@app.route("/about",methods=['POST'])
 def about():
     return render_template('aboutus.html')
 
@@ -131,8 +131,9 @@ def GetEmp():
                            out_lname="NULL",
                            out_interest="NULL",
                            out_location="NULL",
+                           out_jobtitle="NULL",
                            out_salary="NULL",
-                           out_othours="NULL",
+                           out_bonus="NULL",
                            out_payroll="NULL",
                            out_date="NULL",                               
                            image_url=img_url
@@ -144,8 +145,9 @@ def GetEmp():
                            out_lname=record[2],
                            out_interest=record[3],
                            out_location=record[4],
-                           out_salary=record[5],
-                           out_othours=record[6],
+                           out_jobtitle=record[5],
+                           out_salary=record[6],
+                           out_bonus=record[7],
                            out_payroll=str(calc_payroll),
                            out_date=sysdate,
                            image_url=img_url
@@ -183,8 +185,9 @@ def UpdateEmp():
                            out_lname=record[2],
                            out_skill=record[3],
                            out_location=record[4],
-                           out_salary=record[5],
-                           out_othours=record[6]
+                           out_jobtitle=record[5],
+                           out_salary=record[6],
+                           out_bonus=record[7]
                           )
 
 @app.route("/upemp", methods=['POST'])
@@ -194,15 +197,17 @@ def UpEmp():
     last_name = request.form['last_name']
     pri_skill = request.form['pri_skill']
     location = request.form['location']
+    job_title = request.form['job_title']
     salary = request.form['salary']
-    othours = request.form['othours']
+    bonus = request.form['bonus']
     emp_image_file = request.files['emp_image_file']
 
-    update_sql = "UPDATE employee SET first_name=(%s), last_name=(%s), pri_skill=(%s), location=(%s), salary=(%s), othours=(%s) WHERE emp_id = (%s)"
+    update_sql = "UPDATE employee SET first_name=(%s), last_name=(%s), pri_skill=(%s), location=(%s), job_title=(%s), salary=(%s), bonus=(%s) WHERE emp_id = (%s)"
     cursor = db_conn.cursor()
 
-    try:   
-        cursor.execute(update_sql, (first_name, last_name, pri_skill, location, salary, salary, othours))
+    try:
+    
+        cursor.execute(update_sql, (first_name, last_name, pri_skill, location, job_title, salary, bonus))
         db_conn.commit()
         emp_name = "" + first_name + " " + last_name
         if emp_image_file.filename is not None:
