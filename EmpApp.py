@@ -46,17 +46,17 @@ def uppage():
 def deleteEmp():
     return render_template('DeleteEmp.html')
 
-@app.route("/fsd")
+@app.route("/czs")
 def fsdpage():
-    return render_template('fongsukdien.html')
+    return render_template('chuazs.html')
 
-@app.route("/fmw")
+@app.route("/fxy")
 def fmwpage():
-    return render_template('mengwen.html')
+    return render_template('fongxy.html')
 
-@app.route("/ethan")
+@app.route("/tpy")
 def ethanpage():
-    return render_template('ethanlim.html')
+    return render_template('eunicetpy.html')
 
 
 @app.route("/add", methods=['POST'])
