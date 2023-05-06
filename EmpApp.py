@@ -249,16 +249,34 @@ def delete():
     emp_id = request.form['emp_id']
     delete_sql = "DELETE FROM employee WHERE emp_id = (%s)"
     select_sql = "SELECT * FROM employee WHERE emp_id = (%s)"
-
     cursor = db_conn.cursor()
-    cursor.execute(delete_sql, (emp_id))
-    db_conn.commit()
-    cursor.execute(select_sql, (emp_id))
-    object_name = "emp-id-" + str(emp_id) + "_image_file"
-    s3 = boto3.resource('s3')
-    s3.Object(custombucket, object_name).delete()
-    record = cursor.fetchone()
-    obj = s3.Object(custombucket, object_name)
+    img_url = ""
+    try:
+        cursor.execute(select_sql,(emp_id))
+        print("Fetching single row")        
+        # Fetch one record from SQL query output
+        record = cursor.fetchone()
+        print("Fetched: ",record)
+        if record is None:
+            print("No data found.")
+            
+        else:
+            cursor.execute(delete_sql, (emp_id))
+            db_conn.commit()
+            
+            object_name = "emp-id-" + str(emp_id) + "_image_file"
+            s3 = boto3.resource('s3')
+            s3.Object(custombucket, object_name).delete()
+            record = cursor.fetchone()
+            obj = s3.Object(custombucket, object_name)
+            
+    except Exception as e:
+        return str(e)
+
+    finally:
+        cursor.close()
+
+    print("delete data done...")
     return render_template('DeleteEmpOutput.html', deleted_id=emp_id)
 
 @app.route("/fsd")
