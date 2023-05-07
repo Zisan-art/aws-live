@@ -11,7 +11,7 @@
         <nav>
             <a href="#about">About me</a>
             <a href="#skills">Skill</a>
-            <a href="#gallery">Gallery</a>
+            <a href="#projects">Project</a>
         </nav>
     </header>
     <div class="home-banner">
@@ -21,58 +21,58 @@
         <div class="wrapper">
             <div id="home">
             <main>
-				<section id="about">
-					<h2>Welcome to my world</h2>
-					<p>
-						Introducing me, a Malaysian born in the vibrant state of Selangor in 2002. Currently, I am pursuing my studies in Data Science at 
-						TARUMT, a prestigious institution well-known for producing skilled professionals in the field of technology.
-					</p>
-					<p>
-						As a curious and enthusiastic individual, I am passionate about exploring the potential of data and technology to drive positive 
-						change in society. Growing up in Malaysia has given me a unique perspective, drawing from a diverse cultural heritage that has 
-						shaped my outlook on life and my approach to problem-solving.
-					</p>
-					<p>
-						With a natural curiosity and a desire to learn, I am excited to delve deeper into the field of Data Science and discover the 
-						endless possibilities it has to offer. Armed with sharp analytical skills and a drive to succeed, I am determined to excel in 
-						my chosen field and contribute to the ever-evolving landscape of technology.
-					</p>	
-					<p>	
-						I am constantly motivated by a sense of purpose, and I believe that with hard work and dedication, I can make a positive impact 
-						in the world. I look forward to the journey ahead, and I am excited to see where my passion for data and technology will take me.
-					</p>
-				</section>
+			<section id="about">
+				<h2>Welcome to my world</h2>
+				<p>
+					Introducing me, a Malaysian born in the vibrant state of Selangor in 2002. Currently, I am pursuing my studies in Data Science at 
+					TARUMT, a prestigious institution well-known for producing skilled professionals in the field of technology.
+				</p>
+				<p>
+					As a curious and enthusiastic individual, I am passionate about exploring the potential of data and technology to drive positive 
+					change in society. Growing up in Malaysia has given me a unique perspective, drawing from a diverse cultural heritage that has 
+					shaped my outlook on life and my approach to problem-solving.
+				</p>
+				<p>
+					With a natural curiosity and a desire to learn, I am excited to delve deeper into the field of Data Science and discover the 
+					endless possibilities it has to offer. Armed with sharp analytical skills and a drive to succeed, I am determined to excel in 
+					my chosen field and contribute to the ever-evolving landscape of technology.
+				</p>	
+				<p>	
+					I am constantly motivated by a sense of purpose, and I believe that with hard work and dedication, I can make a positive impact 
+					in the world. I look forward to the journey ahead, and I am excited to see where my passion for data and technology will take me.
+				</p>
+			</section>
 
-				<section id="skills">
-					<h2>My Diverse Skillset</h2>
-				  
-					<div class="skill">
-					  <h3>Data analysis</h3>
-					  <p>I skilled in <b>analyzing data</b> and drawing insights from it.</p>
-					  <p>I able to interpret the results of their analysis and communicate them effectively to stakeholders.</p>
-					  
+			<section id="skills">
+				<h2>My Diverse Skillset</h2>
+				
+				<div class="skill">
+					<h3>Data analysis</h3>
+					<p>I skilled in <b>analyzing data</b> and drawing insights from it.</p>
+					<p>I able to interpret the results of their analysis and communicate them effectively to stakeholders.</p>
+					
+				</div>
+				
+				<div class="skill">
+					<h3>Data visualization</h3>
+					<p>I able to create clear and effective <b>visualizations</b>.</p>
+					<p>I equip knowledge of data visualization tools and best practices for creating effective visualizations.</p>
+				</div>
+			</section>
+				
+			<section id="projects">
+				<h2>My Projects</h2>
+				<div class="gallery-images">
+					<div class="image-container">
+						<img src="{{ url_for('static', filename='fxy/img/project1.png')}}" alt="OCR">
+						<p>OCR: An Optical Character Recognition system that can recognize printed or handwritten text from images.</p>
 					</div>
-				  
-					<div class="skill">
-					  <h3>Data visualization</h3>
-					  <p>I able to create clear and effective <b>visualizations</b>.</p>
-					  <p>I equip knowledge of data visualization tools and best practices for creating effective visualizations.</p>
+					<div class="image-container">
+						<img src="{{ url_for('static', filename='fxy/img/project2.jpeg')}}" alt="Recommender">
+						<p>Recommender: A book recommendation system that suggests books based on user preferences.</p>
 					</div>
-				  </section>
-				  
-				  <section id="gallery">
-					<h2>My Gallery</h2>
-					<div class="gallery-images">
-					  <div class="image-container">
-						<img src="{{ url_for('static', filename='fxy/img/bmIX.jpg')}}" alt="Car">
-					  </div>
-					  <div class="image-container">
-						<img src="{{ url_for('static', filename='fxy/img/food.jpeg')}}" alt="Food">
-					  </div>
-					  <div class="image-container">
-						<img src="{{ url_for('static', filename='fxy/img/travel.jpg')}}" alt="Travel">
-					</div>
-				  </section>				  
+				</div>
+			</section>				  
             </main>
             </div>
             <br>
