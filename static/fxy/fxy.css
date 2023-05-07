@@ -62,7 +62,7 @@ nav a {
     width: 99%;
     height: 500px;
     position: fixed;
-    background-image: url(img/banner.jpg);
+    background-image: {{ url_for('static', filename='fxy/img/banner.jpg')}}
     -webkit-background-size:cover;
     background-size: cover;
     background-position: center center;
