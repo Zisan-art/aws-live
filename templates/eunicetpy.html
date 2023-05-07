@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='tpy/css/font-awesome.min.css')}}">
     <link rel="stylesheet" href="{{ url_for('static', filename='tpy/css/custom.min.css')}}">
     <link href='https://fonts.googleapis.com/css?family=Playfair+Display+SC:700' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
 	<style>
 		.intro h1:before {
 			content: 'Eunice';
@@ -30,7 +30,9 @@
 				    <ul>
 				        <li class="active"><a href="#about">About</a></li>
 				        <li><a href="#achievements">Achievements</a></li>
-				        <li><a href="#skills">Skills</a></li>
+						<li><a href="#projects">Projects</a></li>
+				        <li><a href="#skills">Technical Skills</a></li>
+						<li><a href="#skills1">Practical Skills</a></li>
 				    </ul>
 				</nav>
 			</header>
@@ -73,6 +75,33 @@
 		</div>
 	</div>
 
+	<!-- Projects -->
+	<div class="award section second" id="projects">
+		<div class="container">
+			<h1>Projects</h1>
+			<ul class="skill-list list-flat">
+				<li>November 2022</li>
+				<li><strong>Python</strong></li>
+				<li>Lemmanatization of the Malaysian Rojak Language</li>
+			</ul>
+			<ul class="skill-list list-flat">
+				<li>June 2022</li>
+				<li><strong>Python</strong></li>
+				<li>Attrition Prediction Using Machine Learning</li>
+			</ul>
+			<ul class="skill-list list-flat">
+				<li>June 2022</li>
+				<li><strong>Java</strong></li>
+				<li>Online Food Order System</li>
+			</ul>
+			<ul class="skill-list list-flat">
+				<li>June 2021</li>
+				<li><strong>C++</strong></li>
+				<li>Track racing game</li>
+			</ul>
+		</div>
+	</div>
+
 	<!-- Technical Skills -->
 	<div class="skills section second" id="skills">
 		<div class="container">
@@ -95,6 +124,30 @@
 			</ul>
 		</div>
 	</div>
+
+	<!-- Practical Skills -->
+	<div class="skills section second" id="skills1">
+		<div class="container">
+			<h1>Practical<br>Skills</h1>
+			<ul class="skill-list list-flat">
+				<li>Problem-Solving</li>
+				<li>Have strong problem-solving skills to identify and solve complex business problems using data</li>
+			</ul>
+			<ul class="skill-list list-flat">
+				<li>Critical thinking</li>
+				<li>Able to analyze data critically and identify patterns and trends to derive insights that can inform business decisions</li>
+			</ul>
+			<ul class="skill-list list-flat">
+				<li>Communication</li>
+				<li>Able to communicate technical concepts to non-technical stakeholders in a clear and concise manner</li>
+			</ul>
+			<ul class="skill-list list-flat">
+				<li>Business acumen</li>
+				<li>Have a good understanding of business and industry trends and be able to use data insights to drive business decisions</li>
+			</ul>
+		</div>
+	</div>
+
 
 	<!-- Quote -->
 	<div class="quote">
@@ -126,7 +179,6 @@
 	<script src="{{ url_for('static', filename='tpy/js/typed.min.js')}}"></script>
 	<script src="{{ url_for('static', filename='tpy/js/kube.min.js')}}"></script>
 	<script src="{{ url_for('static', filename='tpy/js/site.js')}}"></script>
-	
     <script>
 		function newTyped(){}$(function(){$("#typed").typed({
 		// Change to edit type effect
