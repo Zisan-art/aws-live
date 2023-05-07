@@ -3,6 +3,7 @@
 # Amazon Linux 2 AMI
 
 #!/bin/bash
+sudo su
 yum update -y
 yum install git -y
 git clone https://github.com/Zisan-art/aws-live.git
