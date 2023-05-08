@@ -301,10 +301,13 @@ def delete():
 
 @app.route("/company", methods=['POST'])
 def company():
-    select_sql_1 = "SELECT * FROM employee ORDER BY emp_id;"
-    select_sql_2 = "SELECT department, COUNT(*) AS NUM, SUM(salary*1.1) AS PAYROLL FROM employee GROUP BY department ORDER BY NUM DESC;"
-    select_sql_3 = "SELECT location, job_title,  COUNT(*) AS NUM FROM employee GROUP BY location, job_title HAVING NUM > 1;"
+    select_sql_0 = "SELECT COUNT(*) FROM employee;"
+    select_sql_1 = "SELECT *, salary*0.1 AS bonus, salary*1.1 AS payroll FROM employee ORDER BY emp_id"
+    select_sql_2 = "SELECT location, department, COUNT(*) AS NUM, SUM(salary*1.1) AS PAYROLL FROM employee GROUP BY location, department ORDER BY location;"
+    select_sql_3 = "SELECT emp_id, pri_skill, job_title, salary*1.1 AS payroll FROM employee HAVING payroll > 5000 ORDER BY payroll DESC;"
     cursor = db_conn.cursor()
+    cursor.execute(select_sql_0)
+    data0 = cursor.fetchall()
     cursor.execute(select_sql_1)
     data1 = cursor.fetchall()
     cursor.execute(select_sql_2)
@@ -312,7 +315,7 @@ def company():
     cursor.execute(select_sql_3)
     data3 = cursor.fetchall()
     cursor.close()
-    return render_template('company.html',data1 = data1, data2 = data2, data3 = data3)
+    return render_template('company.html', data0 = data, data1 = data1, data2 = data2, data3 = data3)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
