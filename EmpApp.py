@@ -70,8 +70,12 @@ def Add():
     job_title = request.form['job_title']
     salary = request.form['salary']
     emp_image_file = request.files['emp_image_file']
+    
+    bonus = float(salary * 0.10)
+    payroll = float(salary + bonus)
+    hire_date = sysdate
 
-    insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
+    insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
     select_sql = "SELECT * FROM employee WHERE emp_id = (%s)"
     cursor = db_conn.cursor()
     cursor.execute(select_sql,(emp_id))
@@ -81,7 +85,7 @@ def Add():
         return "This Employee ID " + emp_id + " already exist"
 
     try:
-        cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location, department, job_title, salary))
+        cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location, department, job_title, salary, bonus, payroll, hire_date))
         db_conn.commit()
         emp_name = "" + first_name + " " + last_name
         # Uplaod image file in S3 #
@@ -147,7 +151,7 @@ def GetEmp():
     print("fetch data done...")
     if record is None:
         return render_template('GetEmpOutput.html', 
-                           out_id="ID Not Exist", 
+                           out_id=("ID " + emp_id + " Not Exist"), 
                            out_fname="NULL", 
                            out_lname="NULL",
                            out_skill="NULL",
@@ -170,9 +174,9 @@ def GetEmp():
                            out_department=record[5],
                            out_jobtitle=record[6],
                            out_salary=record[7],
-                           out_bonus=float(calc_bonus),
-                           out_payroll=float(calc_payroll),
-                           out_date=sysdate,
+                           out_bonus=record[8],
+                           out_payroll=record[9],
+                           out_date=record[10],
                            image_url=img_url
                           )
 
@@ -222,13 +226,17 @@ def UpEmp():
     job_title = request.form['job_title']
     salary = request.form['salary']
     emp_image_file = request.files['emp_image_file']
+    
+    bonus = float(salary * 0.10)
+    payroll = float(salary + bonus)
+    hire_date = sysdate
 
-    update_sql = "UPDATE employee SET first_name=(%s), last_name=(%s), pri_skill=(%s), location=(%s), department=(%s), job_title=(%s), salary=(%s) WHERE emp_id = (%s)"
+    update_sql = "UPDATE employee SET first_name=(%s), last_name=(%s), pri_skill=(%s), location=(%s), department=(%s), job_title=(%s), salary=(%s), bonus=(%s), payroll=(%s), hire_date=(%s) WHERE emp_id = (%s)"
     cursor = db_conn.cursor()
 
     try:
     
-        cursor.execute(update_sql, (first_name, last_name, pri_skill, location, department, job_title, salary, emp_id))
+        cursor.execute(update_sql, (first_name, last_name, pri_skill, location, department, job_title, salary, bonus, payroll, hire_date, emp_id))
         db_conn.commit()
         emp_name = "" + first_name + " " + last_name
         if emp_image_file.filename is not None:
