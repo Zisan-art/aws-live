@@ -299,8 +299,8 @@ def delete():
     print("delete data done...")
 
 
-@app.route("/aboutAnalysis", methods=['POST'])
-def aboutAnalysis():
+@app.route("/company", methods=['POST'])
+def company():
     select_sql_1 = "SELECT * FROM employee ORDER BY emp_id;"
     select_sql_2 = "SELECT department, COUNT(*) AS NUM, SUM(salary*1.1) AS PAYROLL FROM employee GROUP BY department ORDER BY NUM DESC;"
     select_sql_3 = "SELECT location, job_title,  COUNT(*) AS NUM FROM employee GROUP BY location, job_title HAVING NUM > 1;"
