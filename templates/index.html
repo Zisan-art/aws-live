@@ -1,5 +1,16 @@
 <!DOCTYPE html>
 <html>
+<style>
+ img {
+	height: 100vh;
+    	width: 100%;
+    	margin: 0px;
+    	padding: 0px;
+    	position: relative;
+    	display: flex;
+    	flex-flow: column;
+      }
+</style>
 <head>
 	<title>Faber Castell Company</title>
 </head>
@@ -7,7 +18,7 @@
 	<font color="black" size="5" style="font-family: avenir">
 
 		<h1 style="color: DodgerBlue">Faber Castell Company</h1>
-
+		<img id="background" src="{{ url_for('static', filename='castell.jpg')}}" alt="background">
 		<body bgcolor="lightcyan">
             	<form action="/" autocomplete="on" method = "POST" enctype="multipart/form-data">
             		<button type="submit" formaction="/addemp" style="background: blue; height: 70px; width: 300px; color:white; font:oblique;">ADD EMPLOYEE INFORMATION</button><br><br>
