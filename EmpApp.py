@@ -301,15 +301,13 @@ def delete():
     
 @app.route("/aboutAnalysis",methods=['POST'])
 def aboutAnalysis():
-    select_sql = "SELECT * FROM employee"
-
+    select_sql = "SELECT department, COUNT(*) AS NUM, SUM(salary) AS PAYROLL FROM employee GROUP BY department ORDER BY NUM DESC;"
     cursor = db_conn.cursor()
-
     cursor.execute(select_sql)
-    rows = cursor.fetchall()
-
-    return render_template('aboutus.html',table_code=rows)
+    data = cursor.fetchall()
     cursor.close()
+    return render_template('aboutus.html',data = data)
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
