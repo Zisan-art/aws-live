@@ -315,7 +315,7 @@ def company():
     cursor.execute(select_sql_3)
     data3 = cursor.fetchall()
     cursor.close()
-    return render_template('company.html', data0 = data, data1 = data1, data2 = data2, data3 = data3)
+    return render_template('company.html', data0 = data0, data1 = data1, data2 = data2, data3 = data3)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
