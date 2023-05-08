@@ -24,15 +24,14 @@ div {
 </style>
 
 <head>
-	
 	<title>Faber Castell Company</title>
 </head>
 <center>
 	<font color="black" size="5" style="font-family: avenir">
 		<img id="background" src="{{ url_for('static', filename='castell.jpg')}}" alt="background">
+		<h1 style="color: white; position: absolute;">Faber Castell Company</h1>
 		<body bgcolor="lightcyan">
 		<div>
-		<h1 style="color: white">Faber Castell Company</h1>
             	<form action="/" autocomplete="on" method = "POST" enctype="multipart/form-data">
             		<button type="submit" formaction="/addemp" style="border: 1px solid white; background: white; height: 70px; width: 300px; color:black; font:oblique;">ADD EMPLOYEE INFORMATION</button><br><br>
 			<button type="submit" formaction="/getemp" style="border: 1px solid white; background: white; height: 70px; width: 300px; color:black; font:oblique;">GET EMPLOYEE INFORMATION</button><br><br>
