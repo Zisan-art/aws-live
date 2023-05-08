@@ -4,6 +4,7 @@ import os
 import boto3
 from config import *
 from datetime import datetime
+from tabulate import tabulate
 
 app = Flask(__name__)
 
@@ -298,6 +299,14 @@ def delete():
 
     print("delete data done...")
     
+@app.route('/company', methods=['POST'])
+def summary():
+    select_sql = "SELECT department, COUNT(*) AS NUM, SUM(salary) AS PAYROLL FROM employee GROUP BY department ORDER BY NUM DESC;"
+    cursor = db_conn.cursor()
+    cursor.execute(select_sql)
+    department = cursor.fetchall()
+    output = print(tabulate(department, headers=['Department', 'NUM', 'PAYROLL'], tablefmt='psql'))
+    return render_template('TotalEmployee.html', output = output)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
