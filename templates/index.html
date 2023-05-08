@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html>
 <style>
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
  img {
 	height: 100vh;
     	width: 100%;
@@ -9,8 +14,7 @@
     	position: relative;
     	display: flex;
     	flex-flow: column;
-      }
-      
+}    
 div {
   	position: absolute;
   	top: 50%;
@@ -28,13 +32,13 @@ div {
 		<img id="background" src="{{ url_for('static', filename='try.jpg')}}" alt="background">
 		<body bgcolor="lightcyan">
 		<div>
-		<h1 style="color: DodgerBlue">Faber Castell Company</h1>
+		<h1 style="color: white">Faber Castell Company</h1>
             	<form action="/" autocomplete="on" method = "POST" enctype="multipart/form-data">
-            		<button type="submit" formaction="/addemp" style="background: blue; height: 70px; width: 300px; color:white; font:oblique;">ADD EMPLOYEE INFORMATION</button><br><br>
-			<button type="submit" formaction="/getemp" style="background: blue; height: 70px; width: 300px; color:white; font:oblique;">GET EMPLOYEE INFORMATION</button><br><br>
-			<button type="submit" formaction="/updateemp" style="background: blue; height: 70px; width: 300px; color:white; font:oblique;">UPDATE EMPLOYEE INFORMATION</button><br><br>
-			<button type="submit" formaction="/deleteemp" style="background: blue; height: 70px; width: 300px; color:white; font:oblique;">DELETE EMPLOYEE INFORMATION</button><br><br>
-                	<button type="submit" formaction="/about" style="background: blue; height: 70px; width: 300px; color:white; font:oblique;">ABOUT US</button><br><br>
+            		<button type="submit" formaction="/addemp" style="border: 1px solid white; background: white; height: 70px; width: 300px; color:black; font:oblique;">ADD EMPLOYEE INFORMATION</button><br><br>
+			<button type="submit" formaction="/getemp" style="border: 1px solid white; background: white; height: 70px; width: 300px; color:black; font:oblique;">GET EMPLOYEE INFORMATION</button><br><br>
+			<button type="submit" formaction="/updateemp" style="border: 1px solid white; background: white; height: 70px; width: 300px; black:white; font:oblique;">UPDATE EMPLOYEE INFORMATION</button><br><br>
+			<button type="submit" formaction="/deleteemp" style="border: 1px solid white; background: white; height: 70px; width: 300px; black:white; font:oblique;">DELETE EMPLOYEE INFORMATION</button><br><br>
+                	<button type="submit" formaction="/about" style="border: 1px solid white; background: white; height: 70px; width: 300px; black:white; font:oblique;">ABOUT US</button><br><br>
             	</form>
 		</div>
 		</body>
