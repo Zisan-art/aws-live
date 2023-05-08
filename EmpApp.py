@@ -28,11 +28,6 @@ def home():
 
 @app.route("/about", methods=['POST'])
 def about():
-    select_sql = "SELECT department, COUNT(*) AS NUM, SUM(salary) AS PAYROLL FROM employee GROUP BY department ORDER BY NUM DESC;"
-    cursor = db_conn.cursor()
-    cursor.execute(select_sql)
-    data = cursor.fetchall()
-    cursor.close()
     return render_template('aboutus.html',data = data)
 
 @app.route("/addemp",methods=['POST'])
@@ -303,6 +298,21 @@ def delete():
 
     print("delete data done...")
 
+
+@app.route("/aboutAnalysis", methods=['POST'])
+def aboutAnalysis():
+    select_sql_1 = "SELECT * FROM employee ORDER BY emp_id;"
+    select_sql_2 = "SELECT department, COUNT(*) AS NUM, SUM(salary*1.1) AS PAYROLL FROM employee GROUP BY department ORDER BY NUM DESC;"
+    select_sql_3 = "SELECT location, job_title,  COUNT(*) AS NUM FROM employee GROUP BY location, job_title HAVING NUM > 1;"
+    cursor = db_conn.cursor()
+    cursor.execute(select_sql_1)
+    data1 = cursor.fetchall()
+    cursor.execute(select_sql_2)
+    data2 = cursor.fetchall()
+    cursor.execute(select_sql_3)
+    data3 = cursor.fetchall()
+    cursor.close()
+    return render_template('company.html',data1 = data1, data2 = data2, data3 = data3)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
