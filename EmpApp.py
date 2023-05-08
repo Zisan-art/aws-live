@@ -26,9 +26,14 @@ table = 'employee'
 def home():
     return render_template('index.html')
 
-@app.route("/about",methods=['POST'])
+@app.route("/about", methods=['POST'])
 def about():
-    return render_template('aboutus.html')
+    select_sql = "SELECT department, COUNT(*) AS NUM, SUM(salary) AS PAYROLL FROM employee GROUP BY department ORDER BY NUM DESC;"
+    cursor = db_conn.cursor()
+    cursor.execute(select_sql)
+    data = cursor.fetchall()
+    cursor.close()
+    return render_template('aboutus.html',data = data)
 
 @app.route("/addemp",methods=['POST'])
 def AddEmp():
@@ -297,16 +302,6 @@ def delete():
         cursor.close()
 
     print("delete data done...")
-    
-    
-@app.route("/aboutAnalysis",methods=['POST'])
-def aboutAnalysis():
-    select_sql = "SELECT department, COUNT(*) AS NUM, SUM(salary) AS PAYROLL FROM employee GROUP BY department ORDER BY NUM DESC;"
-    cursor = db_conn.cursor()
-    cursor.execute(select_sql)
-    data = cursor.fetchall()
-    cursor.close()
-    return render_template('aboutus.html',data = data)
 
 
 if __name__ == '__main__':
