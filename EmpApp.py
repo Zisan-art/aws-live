@@ -73,6 +73,7 @@ def Add():
     
     bonus = float(salary * 0.10)
     payroll = float(salary + bonus)
+    sysdate = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
     hire_date = sysdate
 
     insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
@@ -121,7 +122,6 @@ def Add():
 @app.route("/fetchdata", methods=['POST'])
 def GetEmp():
     emp_id = request.form['emp_id']
-    sysdate = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
     select_sql = "SELECT * FROM employee WHERE emp_id = (%s)"
     cursor = db_conn.cursor()
     img_url = ""
@@ -229,6 +229,8 @@ def UpEmp():
     
     bonus = float(salary * 0.10)
     payroll = float(salary + bonus)
+    
+    sysdate = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
     hire_date = sysdate
 
     update_sql = "UPDATE employee SET first_name=(%s), last_name=(%s), pri_skill=(%s), location=(%s), department=(%s), job_title=(%s), salary=(%s), bonus=(%s), payroll=(%s), hire_date=(%s) WHERE emp_id = (%s)"
