@@ -299,7 +299,7 @@ def delete():
     print("delete data done...")
 
 
-@app.route("/company")
+@app.route('/company', methods=['POST'])
 def company():
     select_sql_0 = "SELECT COUNT(*) FROM employee;"
     select_sql_1 = "SELECT *, salary*0.1 AS bonus, salary*1.1 AS payroll FROM employee ORDER BY emp_id"
