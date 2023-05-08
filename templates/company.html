@@ -15,7 +15,7 @@
 	<font color="black" size="5" style="font-family: avenir">
 
 		<h1 style="color: DodgerBlue">Employee Information</h1>
-
+		
 		<body bgcolor="lightcyan">
 			{% for row in data0 %} 
 				<h3>Total employee: {{row[0]}} employees </h3>
@@ -56,10 +56,12 @@
 
 			<div style="width: 100%;">
 			<div style="float:left; width: 50%;">
+			<h3>Total employee in each area</h3><br>
       			<table>
   				<thead>
     					<tr>
-        					<th>Department</th>
+        					<th>Location</th>
+						<th>Department</th>
         					<th>Num</th>
         					<th>Total Payroll</th>
     					</tr>
@@ -68,21 +70,24 @@
      					{% for row in data2 %}    
             					<tr>
                 					<td>{{row[0]}}</td>
-                					<td>{{row[1]}}</td>
-                					<td>RM {{row[2]}}</td>
+							<td>{{row[1]}}</td>
+                					<td>{{row[2]}}</td>
+                					<td>RM {{row[3]}}</td>
             					</tr>
         				{% endfor %}
     				</tbody>
 			</table>
 			</div>
-      
+
       			<div style="float:left; width: 50%;">
+			<h3>High-level employee in company</h3><br>
 			<table>
   				<thead>
     					<tr>
-        					<th>Location</th>
-        					<th>Job Title</th>
-        					<th>Num</th>
+        					<th>Employee ID</th>
+        					<th>Primary Skill</th>
+        					<th>Job_title</th>
+						<th>Total Payroll</th>
     					</tr>
     				</thead>    
     				<tbody>
@@ -90,7 +95,8 @@
             					<tr>
                 					<td>{{row[0]}}</td>
                 					<td>{{row[1]}}</td>
-                					<td>RM {{row[2]}}</td>
+							<td>{{row[2]}}</td>
+                					<td>RM {{row[3]}}</td>
             					</tr>
         				{% endfor %}
     				</tbody>
