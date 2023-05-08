@@ -297,6 +297,21 @@ def delete():
         cursor.close()
 
     print("delete data done...")
+    
+    
+@app.route("/aboutAnalysis",methods=['POST'])
+def aboutAnalysis():
+    select_sql = "SELECT * FROM employee"
+    cursor = db_conn.cursor()
+    cursor.execute(select_sql)    
+    s = "<table style='border:1px solid red'>"    
+    for row in cursor:    
+        s = s + "<tr>"    
+    for x in row:    
+        s = s + "<td>" + str(x) + "</td>"    
+    s = s + "</tr>"    
+    cursor.close() 
+    return render_template('aboutus.html', table = s)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
