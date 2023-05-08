@@ -10,10 +10,27 @@
 
 		<body bgcolor="lightcyan">
 			
-			<form action="/aboutAnalysis" autocomplete="on" method="POST">
-				{{table_code|safe}}
-			</form>
+			<table>
+  				<thead>
+    					<tr>
+        					<th>Department</th>
+        					<th>Num</th>
+        					<th>Total Payroll</th>
+    					</tr>
+    				</thead>    
+    				<tbody>
+     					{% for row in data %}    
+            					<tr>
+                					<td>{{row[0]}}</td>
+                					<td>{{row[1]}}</td>
+                					<td>RM {{row[2]}}</td>
+            					</tr>
+        				{% endfor %}
+    				</tbody>
+			</table>
+			
 			<br><br>
+			
             		<form>
             			<button type="submit" formaction="/czs" style="background: lightpink; height: 100px; width: 300px; color:black; font:oblique; font-size:20px;">CHUA ZI SAN</button><br><br><br>
       				<button type="submit" formaction="/fxy" style="background: lightyellow; height: 100px; width: 300px; color:black; font:oblique; font-size:20px;">FONG XIN YI</button><br><br><br>
