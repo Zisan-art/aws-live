@@ -47,15 +47,15 @@ def deleteEmp():
     return render_template('DeleteEmp.html')
 
 @app.route("/czs")
-def fsdpage():
+def czspage():
     return render_template('chuazisan.html')
 
 @app.route("/fxy")
-def fmwpage():
+def fxypage():
     return render_template('fongxinyi.html')
 
 @app.route("/tpy")
-def ethanpage():
+def tpypage():
     return render_template('eunicetpy.html')
 
 
@@ -299,7 +299,7 @@ def delete():
     print("delete data done...")
 
 
-@app.route("/company", methods=['POST'])
+@app.route("/company")
 def company():
     select_sql_0 = "SELECT COUNT(*) FROM employee;"
     select_sql_1 = "SELECT *, salary*0.1 AS bonus, salary*1.1 AS payroll FROM employee ORDER BY emp_id"
