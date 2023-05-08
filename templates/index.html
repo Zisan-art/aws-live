@@ -10,16 +10,25 @@
     	display: flex;
     	flex-flow: column;
       }
+      
+div {
+  	position: absolute;
+  	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
+}
 </style>
+
 <head>
+	
 	<title>Faber Castell Company</title>
 </head>
 <center>
 	<font color="black" size="5" style="font-family: avenir">
-
-		<h1 style="color: DodgerBlue">Faber Castell Company</h1>
 		<img id="background" src="{{ url_for('static', filename='castell.jpg')}}" alt="background">
 		<body bgcolor="lightcyan">
+		<div>
+		<h1 style="color: DodgerBlue">Faber Castell Company</h1>
             	<form action="/" autocomplete="on" method = "POST" enctype="multipart/form-data">
             		<button type="submit" formaction="/addemp" style="background: blue; height: 70px; width: 300px; color:white; font:oblique;">ADD EMPLOYEE INFORMATION</button><br><br>
 			<button type="submit" formaction="/getemp" style="background: blue; height: 70px; width: 300px; color:white; font:oblique;">GET EMPLOYEE INFORMATION</button><br><br>
@@ -27,6 +36,7 @@
 			<button type="submit" formaction="/deleteemp" style="background: blue; height: 70px; width: 300px; color:white; font:oblique;">DELETE EMPLOYEE INFORMATION</button><br><br>
                 	<button type="submit" formaction="/about" style="background: blue; height: 70px; width: 300px; color:white; font:oblique;">ABOUT US</button><br><br>
             	</form>
+		</div>
 		</body>
 	</font>
 </center>
