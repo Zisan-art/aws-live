@@ -17,13 +17,23 @@
 		<h1 style="color: DodgerBlue">Employee Information</h1>
 
 		<body bgcolor="lightcyan">
+			{% for row in data0 %} 
+				<h3>Total employee: {{row[0]}} employees </h3>
+			{% endfor %}
 			
-      <table>
+			<table>
   				<thead>
     					<tr>
+        					<th>Employee ID</th>
+        					<th>First Name</th>
+        					<th>Last Name</th>
+						<th>Primary Skill</th>
+        					<th>Location</th>
         					<th>Department</th>
-        					<th>Num</th>
-        					<th>Total Payroll</th>
+						<th>Job Title</th>
+        					<th>Salary</th>
+        					<th>Bonus</th>
+						<th>Payroll</th>
     					</tr>
     				</thead>    
     				<tbody>
@@ -31,13 +41,22 @@
             					<tr>
                 					<td>{{row[0]}}</td>
                 					<td>{{row[1]}}</td>
-                					<td>RM {{row[2]}}</td>
+                					<td>{{row[2]}}</td>
+							<td>{{row[3]}}</td>
+                					<td>{{row[4]}}</td>
+							<td>{{row[5]}}</td>
+                					<td>{{row[6]}}</td>
+							<td>{{row[7]}}</td>
+                					<td>{{row[8]}}</td>
+							<td>{{row[9]}}</td>
             					</tr>
         				{% endfor %}
     				</tbody>
 			</table>
-      
-			<table>
+
+			<div style="width: 100%;">
+			<div style="float:left; width: 50%;">
+      			<table>
   				<thead>
     					<tr>
         					<th>Department</th>
@@ -55,7 +74,29 @@
         				{% endfor %}
     				</tbody>
 			</table>
+			</div>
       
+      			<div style="float:left; width: 50%;">
+			<table>
+  				<thead>
+    					<tr>
+        					<th>Location</th>
+        					<th>Job Title</th>
+        					<th>Num</th>
+    					</tr>
+    				</thead>    
+    				<tbody>
+     					{% for row in data3 %}    
+            					<tr>
+                					<td>{{row[0]}}</td>
+                					<td>{{row[1]}}</td>
+                					<td>RM {{row[2]}}</td>
+            					</tr>
+        				{% endfor %}
+    				</tbody>
+			</table>
+      			</div>
+			</div>
 		</body>
 	</font>
 </center>
